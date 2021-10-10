@@ -1,6 +1,7 @@
 //creamos un mock de la DB
 //const list = [];
 //const db = require('mongoose');
+const e = require('express');
 const Model = require('./model');
 
 /*
@@ -23,13 +24,28 @@ function addMessage(message){
 }
 
 async function getMessages(filterUser){
-    //return list;
-    let filter = {};
-    if(filterUser !== null){
-        filter = { user: filterUser };
-    }
-    const messages = await Model.find(filter);//pedimos todos los documentos
-    return messages;
+    return new Promise((resolve, reject) => {
+        let filter = {};
+        if(filterUser !== null){
+            filter = { user: filterUser };
+        }
+        //const messages = Model.find(filter)//pedimos todos los documentos
+        Model.find(filter)
+            .populate('user')
+            .exec((error, populated) => {
+                if(error){
+                    reject(error);
+                    return false;
+                }
+
+                resolve(populated);
+
+            })/*
+            .catch(e => {
+                reject(e);
+            });*/
+            //resolve(messages);
+    })
 }
 
 async function updateText(id, message){
