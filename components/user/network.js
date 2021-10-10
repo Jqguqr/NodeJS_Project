@@ -1,4 +1,3 @@
-/*
 const express = require('express');
 const response = require('../../network/response');
 const controller = require('./controller');
@@ -14,5 +13,14 @@ router.post('/', function(req, res){
         });
 });
 
+router.get('/', function(req, res){
+    controller.getUsers()
+        .then(users => {
+            response.success(req, res, users, 200)
+        })
+        .catch(e => {
+            response.error(req, res, 'Unexpected Eror', 500, e);
+        });
+});
+
 module.exports = router;
-*/

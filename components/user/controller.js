@@ -1,4 +1,3 @@
-/*
 const store = require('./store');
 
 function addUser(name){
@@ -13,7 +12,11 @@ function addUser(name){
     return store.add(user);
 }
 
+function getUsers(){
+    return store.list();
+}
+
 module.exports = {
     addUser,
+    getUsers,
 }
-*/

@@ -1,3 +1,5 @@
+//comando para corre la aplicaión nodemon server.js
+
 const express = require('express');//la forma de node de traer modulos de otros sitios
 //import expres from 'express';
 const bodyParse = require('body-parser');
